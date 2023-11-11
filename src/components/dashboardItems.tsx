@@ -1,5 +1,9 @@
 import React from "react";
-import Divider from "@mui/material/Divider";
+import ItemContainer from "./itemContainer";
+import PublicIcon from "@mui/icons-material/Public";
+import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
+import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
+
 interface DashboardItemsProps {
   isDashboardOpen: boolean;
   data: Item[];
@@ -25,30 +29,36 @@ const DashboardItems: React.FC<DashboardItemsProps> = ({
     if (item.type === "TEXT") {
       return (
         item.text && (
-          <div key={item.id}>
-            <Divider />
-            <p>{item.text}</p>
-          </div>
+          <ItemContainer>
+            <>
+              <TextFieldsOutlinedIcon style={{ marginRight: "5px" }} />
+              <span>{item.text}</span>
+            </>
+          </ItemContainer>
         )
       );
     }
     if (item.type === "VISUALIZATION") {
       return (
         item.visualization && (
-          <div key={item.id}>
-            <Divider />
-            <p>{item.visualization.name}</p>
-          </div>
+          <ItemContainer>
+            <>
+              <QueryStatsOutlinedIcon style={{ marginRight: "5px" }} />
+              <span>{item.visualization.name}</span>
+            </>
+          </ItemContainer>
         )
       );
     }
     if (item.type === "MAP") {
       return (
         item.map && (
-          <div key={item.id}>
-            <Divider />
-            <p>{item.map.name}</p>
-          </div>
+          <ItemContainer>
+            <>
+              <PublicIcon style={{ marginRight: "5px" }} />
+              <span>{item.map.name}</span>
+            </>
+          </ItemContainer>
         )
       );
     }

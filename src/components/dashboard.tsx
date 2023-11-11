@@ -79,7 +79,9 @@ const Dashboard: React.FC<DashboardCardProps> = ({
         }
         id="panel1bh-header"
       >
-        <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
+        <Typography
+          sx={{ width: "100%", textAlign: "center", fontWeight: "bold" }}
+        >
           {dashboardTitle}
         </Typography>
       </AccordionSummary>
