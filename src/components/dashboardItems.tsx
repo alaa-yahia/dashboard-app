@@ -1,5 +1,5 @@
 import React from "react";
-
+import Divider from "@mui/material/Divider";
 interface DashboardItemsProps {
   isDashboardOpen: boolean;
   data: Item[];
@@ -23,15 +23,34 @@ const DashboardItems: React.FC<DashboardItemsProps> = ({
 }) => {
   const itemComponent = (item: Item) => {
     if (item.type === "TEXT") {
-      return item.text && <p key={item.id}>{item.text}</p>;
+      return (
+        item.text && (
+          <div key={item.id}>
+            <Divider />
+            <p>{item.text}</p>
+          </div>
+        )
+      );
     }
     if (item.type === "VISUALIZATION") {
       return (
-        item.visualization && <p key={item.id}>{item.visualization.name}</p>
+        item.visualization && (
+          <div key={item.id}>
+            <Divider />
+            <p>{item.visualization.name}</p>
+          </div>
+        )
       );
     }
     if (item.type === "MAP") {
-      return item.map && <p key={item.id}>{item.map.name}</p>;
+      return (
+        item.map && (
+          <div key={item.id}>
+            <Divider />
+            <p>{item.map.name}</p>
+          </div>
+        )
+      );
     }
   };
 

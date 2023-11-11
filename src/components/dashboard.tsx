@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import DashboardItems from "./dashboardItems";
 
 interface DashboardCardProps {
@@ -56,19 +62,34 @@ const Dashboard: React.FC<DashboardCardProps> = ({
   }
 
   return (
-    <div>
-      <p
-        onClick={() => {
-          setExpandedDashboardId(dashboardId);
+    <Accordion expanded={dashboardId === expandedDashboardId}>
+      <AccordionSummary
+        sx={{
+          pointerEvents: "none",
         }}
+        expandIcon={
+          <ExpandMoreIcon
+            onClick={() => {
+              setExpandedDashboardId(dashboardId);
+            }}
+            sx={{
+              pointerEvents: "auto",
+            }}
+          />
+        }
+        id="panel1bh-header"
       >
-        {dashboardTitle}
-      </p>
-      <DashboardItems
-        data={data}
-        isDashboardOpen={dashboardId === expandedDashboardId}
-      />
-    </div>
+        <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
+          {dashboardTitle}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <DashboardItems
+          data={data}
+          isDashboardOpen={dashboardId === expandedDashboardId}
+        />
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
