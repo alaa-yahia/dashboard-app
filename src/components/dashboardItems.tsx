@@ -1,8 +1,7 @@
 import React from "react";
 
 interface DashboardItemsProps {
-  id: string;
-  expandedDashboardId: string;
+  isDashboardOpen: boolean;
   data: Item[];
 }
 
@@ -19,9 +18,8 @@ type Item = {
 };
 
 const DashboardItems: React.FC<DashboardItemsProps> = ({
-  id,
   data,
-  expandedDashboardId,
+  isDashboardOpen,
 }) => {
   const itemComponent = (item: Item) => {
     if (item.type === "TEXT") {
@@ -38,11 +36,7 @@ const DashboardItems: React.FC<DashboardItemsProps> = ({
   };
 
   return (
-    <>
-      {id === expandedDashboardId &&
-        data &&
-        data.map((item) => itemComponent(item))}
-    </>
+    <>{isDashboardOpen && data && data.map((item) => itemComponent(item))}</>
   );
 };
 

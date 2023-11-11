@@ -9,7 +9,7 @@ interface Data {
 
 const Dashboards = () => {
   const [data, setData] = useState<Data[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [expandedDashboardId, setExpandedDashboardId] = useState<string>("");
 
   useEffect(() => {
@@ -42,8 +42,8 @@ const Dashboards = () => {
         {data.map((item) => (
           <Dashboard
             key={item.id}
-            id={item.id}
-            title={item.displayName}
+            dashboardId={item.id}
+            dashboardTitle={item.displayName}
             expandedDashboardId={expandedDashboardId}
             setExpandedDashboardId={setExpandedDashboardId}
           />

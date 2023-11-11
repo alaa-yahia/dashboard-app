@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import DashboardItems from "./dashboardItems";
 
 interface DashboardCardProps {
-  id: string;
-  title: string;
+  dashboardId: string;
+  dashboardTitle: string;
   expandedDashboardId: string;
   setExpandedDashboardId: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -20,32 +20,36 @@ type Item = {
 };
 
 const Dashboard: React.FC<DashboardCardProps> = ({
-  id,
-  title,
+  dashboardId,
+  dashboardTitle,
   expandedDashboardId,
   setExpandedDashboardId,
 }) => {
   const [data, setData] = useState<Item[]>([]);
   const [loading, setLoading] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `https://gist.githubusercontent.com/kabaros/da79636249e10a7c991a4638205b1726/raw/fa044f54e7a5493b06bb51da40ecc3a9cb4cd3a5/${id}.json`
-        );
-        const jsonData = await response.json();
-        setData(jsonData?.dashboardItems);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
+    if (dashboardId === expandedDashboardId && !dataFetched) {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const response = await fetch(
+            `https://gist.githubusercontent.com/kabaros/da79636249e10a7c991a4638205b1726/raw/fa044f54e7a5493b06bb51da40ecc3a9cb4cd3a5/${dashboardId}.json`
+          );
+          const jsonData = await response.json();
+          setData(jsonData?.dashboardItems);
+          setLoading(false);
+          setDataFetched(true);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setLoading(false);
+        }
+      };
 
-    fetchData();
-  }, [id]);
+      fetchData();
+    }
+  }, [dashboardId, expandedDashboardId, dataFetched]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -55,15 +59,14 @@ const Dashboard: React.FC<DashboardCardProps> = ({
     <div>
       <p
         onClick={() => {
-          setExpandedDashboardId(id);
+          setExpandedDashboardId(dashboardId);
         }}
       >
-        {title}
+        {dashboardTitle}
       </p>
       <DashboardItems
-        id={id}
         data={data}
-        expandedDashboardId={expandedDashboardId}
+        isDashboardOpen={dashboardId === expandedDashboardId}
       />
     </div>
   );
