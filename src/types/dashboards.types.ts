@@ -30,3 +30,9 @@ export interface DashboardItemsPropsType {
   data: DashboardItemType[];
   selectedFilter: string;
 }
+
+export interface DashboardItemPropsType {
+  itemType: string;
+  itemContent: string;
+  selectedFilter: string;
+}

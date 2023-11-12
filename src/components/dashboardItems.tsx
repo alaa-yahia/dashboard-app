@@ -1,82 +1,35 @@
 import React from "react";
-import ItemContainer from "./itemContainer";
-import PublicIcon from "@mui/icons-material/Public";
-import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
-import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
-import MessageIcon from "@mui/icons-material/Message";
-import type {
-  DashboardItemsPropsType,
-  DashboardItemType,
-} from "../types/dashboards.types";
+import DashboardItem from "./dashboardItem";
+
+import type { DashboardItemsPropsType } from "../types/dashboards.types";
 
 const DashboardItems: React.FC<DashboardItemsPropsType> = ({
   data,
   isDashboardOpen,
   selectedFilter,
 }) => {
-  const itemComponent = (item: DashboardItemType) => {
-    if (
-      (!selectedFilter && item.type === "TEXT") ||
-      selectedFilter === "TEXT"
-    ) {
-      return (
-        item.text && (
-          <ItemContainer key={item.id}>
-            <>
-              <TextFieldsOutlinedIcon style={{ marginRight: "5px" }} />
-              <span>{item.text}</span>
-            </>
-          </ItemContainer>
-        )
-      );
-    }
-    if (
-      (!selectedFilter && item.type === "VISUALIZATION") ||
-      selectedFilter === "VISUALIZATION"
-    ) {
-      return (
-        item.visualization && (
-          <ItemContainer key={item.id}>
-            <>
-              <QueryStatsOutlinedIcon style={{ marginRight: "5px" }} />
-              <span>{item.visualization.name}</span>
-            </>
-          </ItemContainer>
-        )
-      );
-    }
-    if ((!selectedFilter && item.type === "MAP") || selectedFilter === "MAP") {
-      return (
-        item.map && (
-          <ItemContainer key={item.id}>
-            <>
-              <PublicIcon style={{ marginRight: "5px" }} />
-              <span>{item.map.name}</span>
-            </>
-          </ItemContainer>
-        )
-      );
-    }
-
-    if (
-      (!selectedFilter && item.type === "MESSAGES") ||
-      selectedFilter === "MESSAGES"
-    ) {
-      return (
-        item.messages && (
-          <ItemContainer key={item.id}>
-            <>
-              <MessageIcon style={{ marginRight: "5px" }} />
-              <span>Messages: {String(item.messages)}</span>
-            </>
-          </ItemContainer>
-        )
-      );
-    }
-  };
-
   return (
-    <>{isDashboardOpen && data && data.map((item) => itemComponent(item))}</>
+    <>
+      {isDashboardOpen &&
+        data &&
+        data.map((item) => (
+          <DashboardItem
+            itemType={item.type}
+            itemContent={
+              item.type === "TEXT"
+                ? item.text
+                : item.type === "MESSAGES"
+                ? String(item.messages)
+                : item.type === "VISUALIZATION"
+                ? item.visualization.name
+                : item.type === "MAP"
+                ? item.map.name
+                : ""
+            }
+            selectedFilter={selectedFilter}
+          />
+        ))}
+    </>
   );
 };
 
