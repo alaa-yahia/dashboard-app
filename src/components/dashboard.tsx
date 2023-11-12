@@ -67,59 +67,61 @@ const Dashboard: React.FC<DashboardPropsType> = ({
   }
 
   return (
-    <Accordion
-      expanded={dashboardId === expandedDashboardId}
-      style={{ marginBottom: "60px" }}
-    >
-      <AccordionSummary
-        sx={{
-          pointerEvents: "none",
-        }}
-        expandIcon={
-          <ExpandMoreIcon
-            onClick={() => {
-              setExpandedDashboardId(dashboardId);
-            }}
-            sx={{
-              pointerEvents: "auto",
-            }}
-          />
-        }
-        id="panel1bh-header"
+    <li>
+      <Accordion
+        expanded={dashboardId === expandedDashboardId}
+        style={{ marginBottom: "60px" }}
       >
-        <Typography
-          sx={{ width: "100%", textAlign: "center", fontWeight: "bold" }}
+        <AccordionSummary
+          sx={{
+            pointerEvents: "none",
+          }}
+          expandIcon={
+            <ExpandMoreIcon
+              onClick={() => {
+                setExpandedDashboardId(dashboardId);
+              }}
+              sx={{
+                pointerEvents: "auto",
+              }}
+            />
+          }
+          id="accordion-header"
         >
-          {dashboardTitle}
-        </Typography>
-        {isStarred ? (
-          <IconButton
-            sx={{
-              pointerEvents: "auto",
-            }}
-            onClick={handleStarToggle}
+          <Typography
+            sx={{ width: "100%", textAlign: "center", fontWeight: "bold" }}
           >
-            <StarRateIcon />
-          </IconButton>
-        ) : (
-          <IconButton
-            onClick={handleStarToggle}
-            sx={{
-              pointerEvents: "auto",
-            }}
-          >
-            <StarRateOutlinedIcon />
-          </IconButton>
-        )}
-      </AccordionSummary>
-      <AccordionDetails>
-        <DashboardItems
-          data={data}
-          isDashboardOpen={dashboardId === expandedDashboardId}
-          selectedFilter={selectedFilter}
-        />
-      </AccordionDetails>
-    </Accordion>
+            {dashboardTitle}
+          </Typography>
+          {isStarred ? (
+            <IconButton
+              sx={{
+                pointerEvents: "auto",
+              }}
+              onClick={handleStarToggle}
+            >
+              <StarRateIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              onClick={handleStarToggle}
+              sx={{
+                pointerEvents: "auto",
+              }}
+            >
+              <StarRateOutlinedIcon />
+            </IconButton>
+          )}
+        </AccordionSummary>
+        <AccordionDetails>
+          <DashboardItems
+            data={data}
+            isDashboardOpen={dashboardId === expandedDashboardId}
+            selectedFilter={selectedFilter}
+          />
+        </AccordionDetails>
+      </Accordion>
+    </li>
   );
 };
 

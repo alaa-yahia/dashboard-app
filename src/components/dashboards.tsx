@@ -67,7 +67,7 @@ const Dashboards = () => {
           </Select>
         </FormControl>
       </Box>
-      <ul>
+      <ul id="dashboards">
         {data.map((item) => (
           <Dashboard
             key={item.id}
