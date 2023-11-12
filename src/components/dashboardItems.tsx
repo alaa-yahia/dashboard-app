@@ -3,33 +3,24 @@ import ItemContainer from "./itemContainer";
 import PublicIcon from "@mui/icons-material/Public";
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
+import type {
+  DashboardItemsPropsType,
+  DashboardItemType,
+} from "../types/dashboards.types";
 
-interface DashboardItemsProps {
-  isDashboardOpen: boolean;
-  data: Item[];
-}
-
-type Item = {
-  id: string;
-  type: "TEXT" | "VISUALIZATION" | "MAP";
-  text: string;
-  visualization: {
-    name: string;
-  };
-  map: {
-    name: string;
-  };
-};
-
-const DashboardItems: React.FC<DashboardItemsProps> = ({
+const DashboardItems: React.FC<DashboardItemsPropsType> = ({
   data,
   isDashboardOpen,
+  selectedFilter,
 }) => {
-  const itemComponent = (item: Item) => {
-    if (item.type === "TEXT") {
+  const itemComponent = (item: DashboardItemType) => {
+    if (
+      (!selectedFilter && item.type === "TEXT") ||
+      selectedFilter === "TEXT"
+    ) {
       return (
         item.text && (
-          <ItemContainer>
+          <ItemContainer key={item.id}>
             <>
               <TextFieldsOutlinedIcon style={{ marginRight: "5px" }} />
               <span>{item.text}</span>
@@ -38,10 +29,13 @@ const DashboardItems: React.FC<DashboardItemsProps> = ({
         )
       );
     }
-    if (item.type === "VISUALIZATION") {
+    if (
+      (!selectedFilter && item.type === "VISUALIZATION") ||
+      selectedFilter === "VISUALIZATION"
+    ) {
       return (
         item.visualization && (
-          <ItemContainer>
+          <ItemContainer key={item.id}>
             <>
               <QueryStatsOutlinedIcon style={{ marginRight: "5px" }} />
               <span>{item.visualization.name}</span>
@@ -50,10 +44,10 @@ const DashboardItems: React.FC<DashboardItemsProps> = ({
         )
       );
     }
-    if (item.type === "MAP") {
+    if ((!selectedFilter && item.type === "MAP") || selectedFilter === "MAP") {
       return (
         item.map && (
-          <ItemContainer>
+          <ItemContainer key={item.id}>
             <>
               <PublicIcon style={{ marginRight: "5px" }} />
               <span>{item.map.name}</span>
