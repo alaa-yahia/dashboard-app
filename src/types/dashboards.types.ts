@@ -6,7 +6,7 @@ export interface DashboardType {
 
 export type DashboardItemType = {
   id: string;
-  type: "TEXT" | "VISUALIZATION" | "MAP";
+  type: "TEXT" | "VISUALIZATION" | "MAP" | "MESSAGES";
   text: string;
   visualization: {
     name: string;
@@ -14,6 +14,7 @@ export type DashboardItemType = {
   map: {
     name: string;
   };
+  messages: boolean;
 };
 
 export interface DashboardPropsType {

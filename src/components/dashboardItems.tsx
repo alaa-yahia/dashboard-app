@@ -3,6 +3,7 @@ import ItemContainer from "./itemContainer";
 import PublicIcon from "@mui/icons-material/Public";
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
+import MessageIcon from "@mui/icons-material/Message";
 import type {
   DashboardItemsPropsType,
   DashboardItemType,
@@ -51,6 +52,22 @@ const DashboardItems: React.FC<DashboardItemsPropsType> = ({
             <>
               <PublicIcon style={{ marginRight: "5px" }} />
               <span>{item.map.name}</span>
+            </>
+          </ItemContainer>
+        )
+      );
+    }
+
+    if (
+      (!selectedFilter && item.type === "MESSAGES") ||
+      selectedFilter === "MESSAGES"
+    ) {
+      return (
+        item.messages && (
+          <ItemContainer key={item.id}>
+            <>
+              <MessageIcon style={{ marginRight: "5px" }} />
+              <span>Messages: {String(item.messages)}</span>
             </>
           </ItemContainer>
         )

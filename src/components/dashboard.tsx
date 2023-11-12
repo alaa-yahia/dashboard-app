@@ -67,7 +67,7 @@ const Dashboard: React.FC<DashboardPropsType> = ({
   }
 
   return (
-    <li>
+    <li style={{ listStyleType: "none" }}>
       <Accordion
         expanded={dashboardId === expandedDashboardId}
         style={{ marginBottom: "60px" }}

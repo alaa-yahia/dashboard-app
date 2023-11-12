@@ -63,6 +63,7 @@ const Dashboards = () => {
             <option value={""}>All</option>
             <option value={"VISUALIZATION"}>Visulizations</option>
             <option value={"MAP"}>Maps</option>
+            <option value={"MESSAGES"}>Messages</option>
             <option value={"TEXT"}>Text</option>
           </Select>
         </FormControl>
