@@ -19,7 +19,7 @@ const DashboardItems: React.FC<DashboardItemsPropsType> = ({
               item.type === "TEXT"
                 ? item.text
                 : item.type === "MESSAGES"
-                ? String(item.messages)
+                ? `Messages: ${String(item.messages)}`
                 : item.type === "VISUALIZATION"
                 ? item.visualization.name
                 : item.type === "MAP"
