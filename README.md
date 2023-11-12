@@ -4,11 +4,11 @@
 
 ## Technologies used
 
-React
-Material Ui
+- React
+- Material Ui
 
 ## Tools
 
-Vite
-TypeScript
-Cypress
+- Vite
+- TypeScript
+- Cypress
